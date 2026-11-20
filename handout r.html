@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>handout-r</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="handout r_files/libs/clipboard/clipboard.min.js"></script>
+<script src="handout r_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="handout r_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="handout r_files/libs/quarto-html/popper.min.js"></script>
+<script src="handout r_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="handout r_files/libs/quarto-html/anchor.min.js"></script>
+<link href="handout r_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="handout r_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="handout r_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="handout r_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="handout r_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="handout r_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script src="handout r_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link href="handout r_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="handout-r.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="r-control-flow-statements-and-flow-charts" class="level1 unnumbered" style="text-align: center; margin-bottom: 2em;">
+<h1 class="unnumbered">R Control Flow Statements and Flow Charts</h1>
+<p><em>How can decision-making be simplified and visualized using R control statements and flowcharts?</em></p>
+<p><strong>Nina Schenk</strong></p>
+<p>Hochschule Fresenius</p>
+<p>Student ID: 401533851</p>
+<p>Email: schenk.nina2@stud.hs-fresenius.de</p>
+<p>November 25, 2026</p>
+</section>
+<section id="relevance" class="level1">
+<h1>Relevance</h1>
+<p>Making decisions is a big part of our daily life. Whether it is as simple as asking oneself: “What am I going to cook today?” or more important, like deciding what to study in the future. Both of them are decisions that must be made and evaluated. Deciding includes accepting preferred options and declining other alternatives based on given criteria <span class="citation" data-cites="wang_cognitive_2007">(<a href="#ref-wang_cognitive_2007" role="doc-biblioref">Wang &amp; Ruhe, 2007</a>)</span>. Furthermore, decisions are made based on the information available in a particular context and aim to achieve a specific purpose <span class="citation" data-cites="lunenburg_decision_2010">(<a href="#ref-lunenburg_decision_2010" role="doc-biblioref">Lunenburg, 2010, p. 2</a>)</span>.</p>
+<p>R control flow statements are an essential part of handling complex data in decision-making. Conditional statements allow programs to execute different instructions depending on whether specific conditions are fulfilled <span class="citation" data-cites="chen_conditional_2025">(<a href="#ref-chen_conditional_2025" role="doc-biblioref">Chen &amp; Huang, 2025</a>)</span>.</p>
+</section>
+<section id="definition-control-flow-statements" class="level1">
+<h1>Definition Control Flow Statements</h1>
+<p>Control flow refers to the order in which instructions are executed within a program. Unlike expressions, statements do not have a type or value but are executed to produce an effect <span class="citation" data-cites="stein_statements_nodate">(<a href="#ref-stein_statements_nodate" role="doc-biblioref">Stein, n.d., p. 15</a>)</span>. Control flow statements influence the execution sequence by determining which instructions are followed next <span class="citation" data-cites="stein_statements_nodate">(<a href="#ref-stein_statements_nodate" role="doc-biblioref">Stein, n.d., p. 2</a>)</span>. In the context of decision-making, conditional statements allow programs to respond to predefined conditions and execute appropriate actions. This supports the systematic implementation of rule-based decisions and provides flexibility when dealing with different scenarios <span class="citation" data-cites="chen_conditional_2025">(<a href="#ref-chen_conditional_2025" role="doc-biblioref">Chen &amp; Huang, 2025, p. 134</a>)</span>.</p>
+<section id="types-of-conditional-statements-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-conditional-statements-in-r">Types of Conditional Statements in R</h2>
+<p>Conditional statements enable a program to adapt its behavior according to different situations. Four common conditional structures in R are:</p>
+<ul>
+<li><p><strong>If Statement:</strong> Allows a particular action to take place when a given requirement is accomplished.</p></li>
+<li><p><strong>If-Else Statement:</strong> Provides two alternative paths, with the program following one depending on the outcome of a condition.</p></li>
+<li><p><strong>Else If Statement:</strong> Introduces additional possibilities by checking several criteria in order until one is fulfilled <span class="citation" data-cites="chen_conditional_2025">(<a href="#ref-chen_conditional_2025" role="doc-biblioref">Chen &amp; Huang, 2025, p. 135</a>)</span>.</p></li>
+<li><p><strong>Nested If Statement:</strong> Incorporates one decision within another, making it possible to examine more specific circumstances <span class="citation" data-cites="zhang_automated_2018">(<a href="#ref-zhang_automated_2018" role="doc-biblioref">Zhang et al., 2018, p. 1</a>)</span>.</p></li>
+</ul>
+<p>In business systems, predefined rules determine how input information is processed to produce specific outcomes. <span class="citation" data-cites="hatano_dependency-based_2016">Hatano et al. (<a href="#ref-hatano_dependency-based_2016" role="doc-biblioref">2016, p. 1</a>)</span> explain that such rules can be implemented through conditional statements, which influence the results of computations. This demonstrates how conditional logic can be used to implement rule-based decisions in business applications.</p>
+</section>
+</section>
+<section id="flow-charts" class="level1">
+<h1>Flow Charts</h1>
+<section id="definition-and-outlines" class="level2">
+<h2 class="anchored" data-anchor-id="definition-and-outlines">Definition and Outlines</h2>
+<p>Flowcharts are visual tools that illustrate processes and the relationships between individual steps through graphical elements, arrows, and short descriptions. “Sometimes the simpler the method, the better” <span class="citation" data-cites="fulop_introduction_2005">(<a href="#ref-fulop_introduction_2005" role="doc-biblioref">Fülöp, 2005, p. 2</a>)</span>. Referring to this quotation, flowcharts can make complex information easier to understand by presenting processes in a clear and structured way. They can also support learning and comprehension by helping readers recognize connections between different stages of a process <span class="citation" data-cites="kimber_let_2018">(<a href="#ref-kimber_let_2018" role="doc-biblioref">Kimber et al., 2018, p. 1</a>)</span>. Flowcharts are frequently used in decision-making processes. To understand flowcharts better, it is important to recognize that their visual elements have specific meanings. This includes the choice of shapes, colours, and sizes <span class="citation" data-cites="schultheiss_techniques_1963">(<a href="#ref-schultheiss_techniques_1963" role="doc-biblioref">Schultheiss &amp; Heiliger, 1963, p. 2</a>)</span>. The following visualization demonstrates the most important flowchart symbols and their meanings.</p>
+<div class="cell" data-fig-width="6" data-fig-height="1.5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A(["Start / End"])
+    B{"Decision"}
+    C["Process"]
+    D{{"Preparation"}}
+    E["Flow Direction"]
+
+    A ~~~ B
+    B ~~~ C
+    C ~~~ D
+    D --&gt; E
+
+    style A fill:#DCEAF2,stroke:#17365D,color:#17365D
+    style B fill:#DCEAF2,stroke:#17365D,color:#17365D
+    style C fill:#DCEAF2,stroke:#17365D,color:#17365D
+    style D fill:#DCEAF2,stroke:#17365D,color:#17365D
+    style E fill:#DCEAF2,stroke:#17365D,color:#17365D
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Symbol</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Terminator (Oval)</strong></td>
+<td style="text-align: left;">Marks the beginning and end of a process.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Decision (Diamond)</strong></td>
+<td style="text-align: left;">Represents a decision with different possible outcomes.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Process (Rectangle)</strong></td>
+<td style="text-align: left;">Represents an action or processing step.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Preparation (Hexagon)</strong></td>
+<td style="text-align: left;">Indicates preparation or initialization.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Flowline (Arrow)</strong></td>
+<td style="text-align: left;">Shows the direction of the process.</td>
+</tr>
+</tbody>
+</table>
+<p>Based on <span class="citation" data-cites="chapin_flowcharting_1970">Chapin (<a href="#ref-chapin_flowcharting_1970" role="doc-biblioref">1970, p. 122</a>)</span>.*</p>
+<p>According to <span class="citation" data-cites="kimber_let_2018">Kimber et al. (<a href="#ref-kimber_let_2018" role="doc-biblioref">2018, p. 2</a>)</span>, several guidelines can help make flowcharts clear and easy to understand.</p>
+<section id="guidelines-for-flowcharts" class="level3">
+<h3 class="anchored" data-anchor-id="guidelines-for-flowcharts">Guidelines for Flowcharts</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sequence &amp; Structure</th>
+<th style="text-align: left;">Clarity &amp; Connections</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Steps should be arranged in a logical order, preferably from top to bottom or left to right.</td>
+<td style="text-align: left;">Relationships are illustrated by showing how different steps or elements are connected.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A clear sequence illustrates processes that follow consecutive steps.</td>
+<td style="text-align: left;">Clarity is provided by combining short descriptions with graphical elements.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Connecting arrows illustrate the direction of activities and can indicate repeated steps.</td>
+<td style="text-align: left;">Connections between the elements should be easy to follow.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Source: Based on <span class="citation" data-cites="kimber_let_2018">Kimber et al. (<a href="#ref-kimber_let_2018" role="doc-biblioref">2018, p. 2</a>)</span>.</em></p>
+</section>
+</section>
+<section id="flow-chart-example-in-project-management" class="level2">
+<h2 class="anchored" data-anchor-id="flow-chart-example-in-project-management">Flow Chart Example in Project Management</h2>
+<p>Flowcharts are useful tools in project management because they help visualize complex processes, support communication, and facilitate decision-making. An expert assessment of project management tools found that flowcharts received a mean usage-frequency rating of <strong>3.25 out of 5</strong>, indicating moderate use in project management <span class="citation" data-cites="patanakul_empirical_2010">(<a href="#ref-patanakul_empirical_2010" role="doc-biblioref">Patanakul et al., 2010, p. 49</a>)</span>. The relevance of flowcharts in project management can be summarized through four main aspects:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Aspect</th>
+<th style="text-align: left;">Relevance in Project Management</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Planning &amp; Execution</strong></td>
+<td style="text-align: left;">Flowcharts support the visualization of processes during important project phases.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Clarity</strong></td>
+<td style="text-align: left;">They make complex processes and relationships easier to understand.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Communication</strong></td>
+<td style="text-align: left;">They promote shared understanding among stakeholders and help prevent misunderstandings.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Risk Identification</strong></td>
+<td style="text-align: left;">They help identify potential risks within project processes.</td>
+</tr>
+</tbody>
+</table>
+<p>Project management often involves processing large amounts of information, which can make communication and decision-making increasingly complex. Flowcharts help visualize these processes, promote shared understanding among stakeholders, and reduce misunderstandings <span class="citation" data-cites="radkevych_diagrams_2021">(<a href="#ref-radkevych_diagrams_2021" role="doc-biblioref">Radkevych, 2021, p. 1</a>)</span>. Furthermore, visualizing individual process steps can support the identification of potential risks <span class="citation" data-cites="aschwanden-granfelt_process_2017">(<a href="#ref-aschwanden-granfelt_process_2017" role="doc-biblioref">Aschwanden-Granfelt, 2017, p. 8</a>)</span>.</p>
+<section id="rules-for-flowcharts-in-project-management" class="level3">
+<h3 class="anchored" data-anchor-id="rules-for-flowcharts-in-project-management">Rules for Flowcharts in Project Management</h3>
+<p>According to <span class="citation" data-cites="jansen_flowchart_2017">Jansen &amp; Schulz (<a href="#ref-jansen_flowchart_2017" role="doc-biblioref">2017, p. 6</a>)</span>, three aspects are particularly important when visualizing projects:</p>
+<ol type="1">
+<li><p><strong>Overview:</strong> The visualization should provide an overview of the project’s current state on a single screen.</p></li>
+<li><p><strong>Starting Point:</strong> The project visualization should include a dedicated area illustrating the initial situation.</p></li>
+<li><p><strong>Timeline &amp; Objectives:</strong> The initial situation and project objectives should be connected through a timeline, allowing individual work packages to be assigned to specific stages.</p></li>
+</ol>
+<p>Flowcharts are particularly relevant during the planning and execution phases of project management. They can illustrate project scope, schedules, and decision-making processes. For example, a project manager may need to determine whether project costs exceed the available budget. Such decisions can be represented through conditional branches in a flowchart <span class="citation" data-cites="burke_project_2013 patanakul_empirical_2010">(<a href="#ref-burke_project_2013" role="doc-biblioref">Burke, 2013, p. 36</a>; <a href="#ref-patanakul_empirical_2010" role="doc-biblioref">Patanakul et al., 2010, pp. 51–52</a>)</span>.</p>
+</section>
+<section id="limitations-of-flowcharts" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-of-flowcharts">Limitations of Flowcharts</h3>
+<p>Despite their advantages, flowcharts also have several limitations:</p>
+<ul>
+<li><p><strong>Time-consuming adjustments:</strong> Changes to existing processes may require flowcharts to be revised or completely redrawn.</p></li>
+<li><p><strong>Increasing complexity:</strong> Workflows involving numerous activities and decision paths can become difficult to read and understand.</p></li>
+<li><p><strong>Technical requirements:</strong> Creating flowcharts may require suitable software and knowledge of standardized symbols.</p></li>
+</ul>
+<p>These limitations can reduce the effectiveness of flowcharts, particularly when processes are complex or frequently changing <span class="citation" data-cites="aschwanden-granfelt_process_2017">(<a href="#ref-aschwanden-granfelt_process_2017" role="doc-biblioref">Aschwanden-Granfelt, 2017, pp. 9–12</a>)</span>. Nevertheless, flowcharts remain valuable tools for visualizing project processes and supporting structured decision-making.</p>
+</section>
+</section>
+</section>
+<section id="control-statements-and-flow-charts-in-r" class="level1">
+<h1>Control Statements and Flow Charts in R</h1>
+<p>Conditional statements and flowcharts can be combined to visualize decision-making processes in R. The following example demonstrates how an <code>if-else</code> statement can be used to evaluate whether project costs remain within a predefined budget.</p>
+<section id="practical-example-budget-decision" class="level2">
+<h2 class="anchored" data-anchor-id="practical-example-budget-decision">Practical Example: Budget Decision</h2>
+<p>Consider a project with an available budget of €50,000 and estimated costs of €55,000. The following R code evaluates whether the project costs exceed the available budget.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>budget <span class="ot">&lt;-</span> <span class="dv">50000</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>costs <span class="ot">&lt;-</span> <span class="dv">55000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (costs <span class="sc">&lt;=</span> budget) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Within budget"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Budget exceeded"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Budget exceeded"</code></pre>
+</div>
+</div>
+<p>The corresponding flowchart illustrates the decision-making process.</p>
+<div id="fig-budget-flowchart" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-budget-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="budget_flowchart.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-budget-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Budget decision-making process using R control statements. Own illustration.
+</figcaption>
+</figure>
+</div>
+<p><em>Based on <span class="citation" data-cites="satorra_flowchart_2026 soetaert_r_2014 iannone_package_2016 venables_introduction_2009 wickham_syntax_2026 geeksforgeeks_control_2025">(<a href="#ref-geeksforgeeks_control_2025" role="doc-biblioref">GeeksforGeeks, 2025</a>; <a href="#ref-iannone_package_2016" role="doc-biblioref">Iannone &amp; Roy, 2016</a>; <a href="#ref-satorra_flowchart_2026" role="doc-biblioref">Satorra et al., 2026</a>; <a href="#ref-soetaert_r_2014" role="doc-biblioref">Soetaert, 2014</a>; <a href="#ref-venables_introduction_2009" role="doc-biblioref"><span class="nocase">Venables et al.</span>, 2009</a>; <a href="#ref-wickham_syntax_2026" role="doc-biblioref">Wickham, 2026</a>)</span>.</em></p>
+<p><em>Based on <span class="citation" data-cites="satorra_flowchart_2026 soetaert_r_2014 iannone_package_2016 venables_introduction_2009 wickham_syntax_2026 geeksforgeeks_control_2025">(<a href="#ref-geeksforgeeks_control_2025" role="doc-biblioref">GeeksforGeeks, 2025</a>; <a href="#ref-iannone_package_2016" role="doc-biblioref">Iannone &amp; Roy, 2016</a>; <a href="#ref-satorra_flowchart_2026" role="doc-biblioref">Satorra et al., 2026</a>; <a href="#ref-soetaert_r_2014" role="doc-biblioref">Soetaert, 2014</a>; <a href="#ref-venables_introduction_2009" role="doc-biblioref"><span class="nocase">Venables et al.</span>, 2009</a>; <a href="#ref-wickham_syntax_2026" role="doc-biblioref">Wickham, 2026</a>)</span>.</em></p>
+</section>
+<section id="explanation-of-the-r-code" class="level2">
+<h2 class="anchored" data-anchor-id="explanation-of-the-r-code">Explanation of the R Code</h2>
+<p>Figure 1 illustrates how conditional statements can support budget-related decisions in R. First, the assignment operator <code>&lt;-</code> assigns the values <code>50000</code> and <code>55000</code> to the variables <code>budget</code> and <code>costs</code>, respectively. The <code>if</code> statement then evaluates the condition <code>costs &lt;= budget</code>. The comparison operator <code>&lt;=</code> checks whether the project costs are less than or equal to the available budget. The condition is enclosed in parentheses and must return a logical value (<code>TRUE</code> or <code>FALSE</code>) <span class="citation" data-cites="venables_introduction_2009">(<a href="#ref-venables_introduction_2009" role="doc-biblioref"><span class="nocase">Venables et al.</span>, 2009, p. 40</a>)</span>. Curly brackets <code>{ }</code> define the blocks of code executed depending on the result. If the condition is <code>TRUE</code>, the <code>print()</code> function displays <code>"Within budget"</code>. Otherwise, the <code>else</code> statement executes the alternative block, displaying <code>"Budget exceeded"</code>. Since the costs (€55,000) exceed the budget (€50,000), the condition evaluates to <code>FALSE</code>, and the second message is shown. The corresponding flowchart visualizes both possible decision paths, illustrating how conditional statements translate logical evaluations into specific outcomes <span class="citation" data-cites="wickham_syntax_2026 geeksforgeeks_control_2025">(<a href="#ref-geeksforgeeks_control_2025" role="doc-biblioref">GeeksforGeeks, 2025</a>; <a href="#ref-wickham_syntax_2026" role="doc-biblioref">Wickham, 2026</a>)</span>.</p>
+</section>
+<section id="creating-flowcharts-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="creating-flowcharts-in-r">Creating Flowcharts in R</h2>
+<p>Flowcharts can also be created programmatically in R using specialized packages. <span class="citation" data-cites="satorra_flowchart_2026">Satorra et al. (<a href="#ref-satorra_flowchart_2026" role="doc-biblioref">2026</a>)</span> demonstrate this approach through the <code>flowchart</code> package, which provides functions for initializing, structuring, drawing, and exporting flowcharts. The example presented in Figure 3 can alternatively be created using the <code>DiagrammeR</code> package. Its creation involves five main steps:</p>
+<ol type="1">
+<li><p><strong>Load the package:</strong> <code>library(DiagrammeR)</code> provides the required visualization functions.</p></li>
+<li><p><strong>Initialize the diagram:</strong> <code>grViz()</code> and <code>digraph</code> define the flowchart structure.</p></li>
+<li><p><strong>Define elements:</strong> Shapes and labels represent processes, conditions, and outcomes.</p></li>
+<li><p><strong>Connect elements:</strong> Arrows establish the sequence and distinguish between <code>TRUE</code> and <code>FALSE</code> decision paths.</p></li>
+<li><p><strong>Generate the visualization:</strong> Executing the completed code produces the flowchart.</p></li>
+</ol>
+<p>This example demonstrates how conditional decision-making can be represented visually, making the relationship between R control flow statements and flowcharts easier to understand <span class="citation" data-cites="iannone_package_2016">(<a href="#ref-iannone_package_2016" role="doc-biblioref">Iannone &amp; Roy, 2016</a>)</span>.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-aschwanden-granfelt_process_2017" class="csl-entry" role="listitem">
+Aschwanden-Granfelt, S. (2017). <em>Process flow documentation: <span>A</span> flowchart guide for micro and small business</em>.
+</div>
+<div id="ref-burke_project_2013" class="csl-entry" role="listitem">
+Burke, R. (2013). <em>Project management: <span>Planning</span> and control techniques</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-chapin_flowcharting_1970" class="csl-entry" role="listitem">
+Chapin, N. (1970). Flowcharting with the <span>ANSI</span> standard: <span>A</span> tutorial. <em>ACM Computing Surveys</em>, <em>2</em>(2), 119–146.
+</div>
+<div id="ref-chen_conditional_2025" class="csl-entry" role="listitem">
+Chen, Y., &amp; Huang, L. (2025). Conditional statements. In <em><span>MATLAB</span> <span>Roadmap</span> to <span>Applications</span></em> (p. 133).
+</div>
+<div id="ref-fulop_introduction_2005" class="csl-entry" role="listitem">
+Fülöp, J. (2005). <em>Introduction to decision making methods</em>.
+</div>
+<div id="ref-geeksforgeeks_control_2025" class="csl-entry" role="listitem">
+GeeksforGeeks. (2025). <em>Control statements in <span>R</span> programming</em>. GeeksforGeeks.
+</div>
+<div id="ref-hatano_dependency-based_2016" class="csl-entry" role="listitem">
+Hatano, T., Ishio, T., Okada, J., Sakata, Y., &amp; Inoue, K. (2016). Dependency-based extraction of conditional statements for understanding business rules. <em>IEICE Transactions on Information and Systems</em>, <em>99</em>(4), 1117–1126.
+</div>
+<div id="ref-iannone_package_2016" class="csl-entry" role="listitem">
+Iannone, R., &amp; Roy, O. (2016). <em>Package <span>DiagrammeR</span></em>.
+</div>
+<div id="ref-jansen_flowchart_2017" class="csl-entry" role="listitem">
+Jansen, U., &amp; Schulz, W. (2017). Flowchart tool for decision making in interdisciplinary research cooperation. <em>International <span>Conference</span> on <span>Digital</span> <span>Human</span> <span>Modeling</span> and <span>Applications</span> in <span>Health</span>, <span>Safety</span>, <span>Ergonomics</span> and <span>Risk</span> <span>Management</span></em>, 259–269.
+</div>
+<div id="ref-kimber_let_2018" class="csl-entry" role="listitem">
+Kimber, O., Cromley, J. G., &amp; Molnar-Kimber, K. L. (2018). Let your ideas flow: <span>Using</span> flowcharts to convey methods and implications of the results in laboratory exercises, articles, posters, and slide presentations. <em>Journal of Microbiology &amp; Biology Education</em>, <em>19</em>(1).
+</div>
+<div id="ref-lunenburg_decision_2010" class="csl-entry" role="listitem">
+Lunenburg, F. C. (2010). The decision making process. <em>National Forum of Educational Administration &amp; Supervision Journal</em>, <em>27</em>(4).
+</div>
+<div id="ref-patanakul_empirical_2010" class="csl-entry" role="listitem">
+Patanakul, P., Iewwongcharoen, B., &amp; Milosevic, D. (2010). An empirical study on the use of project management tools and techniques across project life-cycle and their impact on project success. <em>Journal of General Management</em>, <em>35</em>(3), 41–66.
+</div>
+<div id="ref-radkevych_diagrams_2021" class="csl-entry" role="listitem">
+Radkevych, O. (2021). Diagrams, charts and graphs as a tool for presenting project information. <em>Profesiina Pedahohika</em>, <em>1</em>(22), 197–212.
+</div>
+<div id="ref-satorra_flowchart_2026" class="csl-entry" role="listitem">
+Satorra, P., Carmezim, J., Pallarès, N., Taylor, K. A., &amp; Tebé, C. (2026). Flowchart: <span>An</span> <span>R</span> package for data flowchart generation. <em>Journal of Open Research Software</em>, <em>14</em>(1), 20–20.
+</div>
+<div id="ref-schultheiss_techniques_1963" class="csl-entry" role="listitem">
+Schultheiss, L. A., &amp; Heiliger, E. M. (1963). <em>Techniques of flow-charting</em>.
+</div>
+<div id="ref-soetaert_r_2014" class="csl-entry" role="listitem">
+Soetaert, K. (2014). <em>R package diagram: <span>Visualising</span> simple graphs, flowcharts, and webs</em>. Royal Netherlands Institute of Sea Research.
+</div>
+<div id="ref-stein_statements_nodate" class="csl-entry" role="listitem">
+Stein, L. A. (n.d.). <em>Statements and rules</em>.
+</div>
+<div id="ref-venables_introduction_2009" class="csl-entry" role="listitem">
+<span class="nocase">Venables, W. N., Smith, D. M., R Development Core Team, et al.</span> (2009). <em>An introduction to <span>R</span></em>. Network Theory Limited.
+</div>
+<div id="ref-wang_cognitive_2007" class="csl-entry" role="listitem">
+Wang, Y., &amp; Ruhe, G. (2007). The cognitive process of decision making. <em>International Journal of Cognitive Informatics and Natural Intelligence</em>, <em>1</em>(2), 73–85.
+</div>
+<div id="ref-wickham_syntax_2026" class="csl-entry" role="listitem">
+Wickham, H. (2026). <em>Syntax</em>. The tidyverse style guide. <a href="https://style.tidyverse.org/syntax.html">https://style.tidyverse.org/syntax.html</a>
+</div>
+<div id="ref-zhang_automated_2018" class="csl-entry" role="listitem">
+Zhang, J., Han, S., Hao, D., Zhang, L., &amp; Zhang, D. (2018). Automated refactoring of nested-if formulae in spreadsheets. <em>Proceedings of the 2018 26th <span>ACM</span> <span>Joint</span> <span>Meeting</span> on <span>European</span> <span>Software</span> <span>Engineering</span> <span>Conference</span> and <span>Symposium</span> on the <span>Foundations</span> of <span>Software</span> <span>Engineering</span></em>, 833–838.
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="affidavit" class="level1">
+<h1>Affidavit</h1>
+<p>I hereby affirm that this submitted paper was authored unaided and solely by me. Additionally, no other sources than those in the reference list were used. Parts of this paper, including tables and figures, that have been taken either verbatim or analogously from other works have in each case been properly cited with regard to their origin and authorship. This paper either in parts or in its entirety, be it in the same or similar form, has not been submitted to any other examination board and has not been published.</p>
+<p>I acknowledge that the university may use plagiarism detection software to check my thesis. I agree to cooperate with any investigation of suspected plagiarism and to provide any additional information or evidence requested by the university.</p>
+<p><strong>Name:</strong> Nina Schenk<br>
+<strong>Date:</strong> 25 November 2026<br>
+<strong>Place:</strong> Niederkassel</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
